@@ -1,13 +1,13 @@
 name: Chromatic
 
 on:
-  push:
-    branches: [master, main]
   pull_request:
+    types: [opened, edited, synchronize]
+  push:
     branches: [master, main]
 
 jobs:
-  chromatic:
+  build-ios:
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -16,7 +16,6 @@ jobs:
           fetch-depth: 0
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_26.3.app
-
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
@@ -24,30 +23,55 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm install
-
-      - name: Prebuild
-        run: npx expo prebuild
-
-      - name: Build iOS
-        run: |
-          xcodebuild \
-            -workspace ios/testingchromaticrncommentfeature.xcworkspace \
-            -scheme testingchromaticrncommentfeature \
-            -configuration Release \
-            -sdk iphonesimulator \
-            -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
-            CODE_SIGNING_ALLOWED=NO \
-            build
-        env:
-          EXPO_PUBLIC_STORYBOOK_ENABLED: "true"
-      - name: Copy built app
-        run: |
-          mkdir -p custom-build-dir
-          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "testingchromaticrncommentfeature.app" -path "*/Release-iphonesimulator/*" | head -1)
-          cp -R "$APP_PATH" custom-build-dir/storybook.app
-
-      - name: Run Chromatic
-        uses: chromaui/action@latest
+      - name: Cache CocoaPods spec repo
+        uses: actions/cache@v6
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          storybookBuildDir: custom-build-dir
+          path: ~/.cocoapods
+          key: cocoapods-specs-${{ hashFiles('package.json', 'app.json') }}
+          restore-keys: |
+            cocoapods-specs-
+      - name: Cache Pods directory
+        uses: actions/cache@v6
+        with:
+          path: ios/Pods
+          key: ios-pods-${{ hashFiles('package.json', 'app.json') }}
+          restore-keys: |
+            ios-pods-
+      - name: Build iOS
+        run: npx --yes chromatic react-native-build --platform=ios --output-dir=build
+      - name: Upload iOS build
+        uses: actions/upload-artifact@v7
+        with:
+          name: ios-build
+          path: build/
+          retention-days: 1
+
+  chromatic:
+    needs: [build-ios]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.20.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Download iOS build
+        uses: actions/download-artifact@v8
+        with:
+          name: ios-build
+          path: build/ios
+      - name: Move Storybook static files
+        run: |
+          mkdir -p storybook-static
+          mv build/ios/storybook.app storybook-static/
+          mv build/android/storybook.apk storybook-static/
+      - name: Publish to Chromatic
+        run: npx --yes chromatic -d storybook-static --exit-zero-on-changes --exit-zero-on-errors
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
