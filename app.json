@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "testing-chromatic-rn-comment-feature",
-    "slug": "testing-chromatic-rn-comment-feature",
+    "slug": "testingchromaticrncommentfeature",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "testingioschromaticv2",
+    "scheme": "testingchromaticrncommentfeature",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
