@@ -1,0 +1,53 @@
+name: Chromatic
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  chromatic:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_26.3.app
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.20.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prebuild
+        run: npx expo prebuild
+
+      - name: Build iOS
+        run: |
+          xcodebuild \
+            -workspace ios/example-app.xcworkspace \
+            -scheme example-app \
+            -configuration Release \
+            -sdk iphonesimulator \
+            -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+        env:
+          EXPO_PUBLIC_STORYBOOK_ENABLED: "true"
+      - name: Copy built app
+        run: |
+          mkdir -p custom-build-dir
+          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "example-app.app" -path "*/Release-iphonesimulator/*" | head -1)
+          cp -R "$APP_PATH" custom-build-dir/storybook.app
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: custom-build-dir
