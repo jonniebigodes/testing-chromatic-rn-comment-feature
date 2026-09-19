@@ -31,8 +31,8 @@ jobs:
       - name: Build iOS
         run: |
           xcodebuild \
-            -workspace ios/example-app.xcworkspace \
-            -scheme example-app \
+            -workspace ios/testingchromaticrncommentfeature.xcworkspace \
+            -scheme testingchromaticrncommentfeature \
             -configuration Release \
             -sdk iphonesimulator \
             -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
@@ -43,7 +43,7 @@ jobs:
       - name: Copy built app
         run: |
           mkdir -p custom-build-dir
-          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "example-app.app" -path "*/Release-iphonesimulator/*" | head -1)
+          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "testingchromaticrncommentfeature.app" -path "*/Release-iphonesimulator/*" | head -1)
           cp -R "$APP_PATH" custom-build-dir/storybook.app
 
       - name: Run Chromatic
