@@ -27,16 +27,14 @@ jobs:
         uses: actions/cache@v6
         with:
           path: ~/.cocoapods
-          key: cocoapods-specs-${{ hashFiles('package.json', 'app.json') }}
+          key: cocoapods-specs-${{ hashFiles('package.json', 'package-lock.json', 'app.json', 'ios/Podfile.lock') }}
           restore-keys: |
             cocoapods-specs-
       - name: Cache Pods directory
         uses: actions/cache@v6
         with:
           path: ios/Pods
-          key: ios-pods-${{ hashFiles('package.json', 'app.json') }}
-          restore-keys: |
-            ios-pods-
+          key: ios-pods-${{ hashFiles('package.json', 'package-lock.json', 'app.json', 'ios/Podfile.lock') }}
       - name: Build iOS
         run: npx --yes chromatic react-native-build --platform=ios --output-dir=build
       - name: Upload iOS build
@@ -70,7 +68,6 @@ jobs:
         run: |
           mkdir -p storybook-static
           mv build/ios/storybook.app storybook-static/
-          mv build/android/storybook.apk storybook-static/
       - name: Publish to Chromatic
         run: npx --yes chromatic -d storybook-static --exit-zero-on-changes --exit-zero-on-errors
         env:
