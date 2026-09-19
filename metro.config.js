@@ -1,11 +1,3 @@
-// // Learn more https://docs.expo.io/guides/customizing-metro
-// const { getDefaultConfig } = require('expo/metro-config');
-
-// /** @type {import('expo/metro-config').MetroConfig} */
-// const config = getDefaultConfig(__dirname);
-
-// module.exports = config;
-
 // Updated configuration to support Storybook in Expo
 const { getDefaultConfig } = require("expo/metro-config");
 
@@ -17,6 +9,7 @@ const {
 
 const config = withStorybook(defaultConfig, {
   enabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true",
+  //enabled: true, // Required for Chromatic, since it doesn't set the environment variable when building the app
 });
 
 module.exports = config;

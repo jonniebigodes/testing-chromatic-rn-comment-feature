@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "testing-ios-chromatic-v2",
-    "slug": "testing-ios-chromatic-v2",
+    "name": "testing-chromatic-rn-comment-feature",
+    "slug": "testing-chromatic-rn-comment-feature",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -39,7 +39,8 @@
           }
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -44,3 +44,5 @@ app-example
 
 *storybook.log
 storybook-static
+
+/custom-build-dir/
