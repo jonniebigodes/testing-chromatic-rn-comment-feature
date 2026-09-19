@@ -37,12 +37,17 @@ jobs:
           key: ios-pods-${{ hashFiles('package.json', 'package-lock.json', 'app.json', 'ios/Podfile.lock') }}
       - name: Build iOS
         run: npx --yes chromatic react-native-build --platform=ios --output-dir=build
+      - name: Print build log on failure
+        if: failure()
+        run: cat build/chromatic-react-native-build-*.log || echo "no log file found in build/"
       - name: Upload iOS build
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: ios-build
           path: build/
           retention-days: 1
+          if-no-files-found: ignore
 
   chromatic:
     needs: [build-ios]
