@@ -22,12 +22,12 @@
     "chromatic:android-release": "chromatic react-native-build --platform android",
     "chromatic:ios-release-configuration": "chromatic react-native-build --platform ios -d custom-build-dir",
     "chromatic:android-release-configuration": "chromatic react-native-build --platform android -d custom-build-dir",
-    "chromatic:build-react-native": "chromatic --project-token=chpt_2e6b11281616491 -d custom-build-dir",
-    "chromatic:build-auto-accept": "chromatic --project-token=chpt_2e6b11281616491 -d custom-build-dir --auto-accept-changes",
-    "chromatic:build-no-auto-accept": "chromatic --project-token=chpt_2e6b11281616491 -d custom-build-dir --exit-zero-on-changes",
-    "chromatic:force-rebuild": "chromatic --project-token=chpt_2e6b11281616491 -d custom-build-dir  --force-rebuild",
-    "chromatic:force-rebuild-exit-zero": "chromatic --project-token=chpt_2e6b11281616491 -d custom-build-dir  --force-rebuild --exit-zero-on-changes",
-    "chromatic:force-rebuild-auto-accept": "chromatic --project-token=chpt_2e6b11281616491 -d custom-build-dir --force-rebuild --auto-accept-changes"
+    "chromatic:build-react-native": "chromatic --project-token=chpt_110e896be7a3ad0 -d custom-build-dir",
+    "chromatic:build-auto-accept": "chromatic --project-token=chpt_110e896be7a3ad0 -d custom-build-dir --auto-accept-changes",
+    "chromatic:build-no-auto-accept": "chromatic --project-token=chpt_110e896be7a3ad0 -d custom-build-dir --exit-zero-on-changes",
+    "chromatic:force-rebuild": "chromatic --project-token=chpt_110e896be7a3ad0 -d custom-build-dir  --force-rebuild",
+    "chromatic:force-rebuild-exit-zero": "chromatic --project-token=chpt_110e896be7a3ad0 -d custom-build-dir  --force-rebuild --exit-zero-on-changes",
+    "chromatic:force-rebuild-auto-accept": "chromatic --project-token=chpt_110e896be7a3ad0 -d custom-build-dir --force-rebuild --auto-accept-changes"
   },
   "dependencies": {
     "@babel/core": "^7.29.0",
