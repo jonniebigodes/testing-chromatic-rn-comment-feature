@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jonniebigodes.testing-chromatic-rn-comment-feature"
     },
     "android": {
       "adaptiveIcon": {

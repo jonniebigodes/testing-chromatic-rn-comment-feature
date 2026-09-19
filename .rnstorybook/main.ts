@@ -8,10 +8,6 @@ const main: StorybookConfig = {
   ],
   // Required for Chromatic
   addons: [],
-  /*  addons: [
-    "@storybook/addon-ondevice-controls",
-    "@storybook/addon-ondevice-actions",
-  ], */
 };
 
 export default main;

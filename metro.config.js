@@ -8,8 +8,8 @@ const {
 } = require("@storybook/react-native/metro/withStorybook");
 
 const config = withStorybook(defaultConfig, {
-  enabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true",
-  //enabled: true, // Required for Chromatic, since it doesn't set the environment variable when building the app
+  //enabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true",
+  enabled: true, // Required for Chromatic, since it doesn't set the environment variable when building the app
 });
 
 module.exports = config;

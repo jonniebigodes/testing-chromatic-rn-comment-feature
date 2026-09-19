@@ -7,13 +7,13 @@ const StorybookUIRoot = view.getStorybookUI({
     setItem: AsyncStorage.setItem,
   },
   //Required for Chromatic
-  /* enableWebsockets: true,
+  enableWebsockets: true,
   host: "react-native.capture.chromatic.com",
   port: 7007,
   secured: true,
   // Recommended
   onDeviceUI: false,
-  shouldPersistSelection: false, */
+  shouldPersistSelection: false,
 });
 
 export default StorybookUIRoot;
