@@ -7,7 +7,15 @@ const meta = {
   component: OTPInput,
   decorators: [
     (Story) => (
-      <View style={{ padding: 44, flex: 1, alignItems: "center" }}>
+      <View
+        style={{
+          padding: 44,
+          flex: 1,
+          alignItems: "center",
+          borderColor: "blue",
+          borderWidth: 6,
+        }}
+      >
         <Story />
       </View>
     ),
