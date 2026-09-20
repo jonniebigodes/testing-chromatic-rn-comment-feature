@@ -11,12 +11,12 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      // <View style={{ padding: 4, flex: 1, borderColor: "red", borderWidth: 6 }}>
-      //   <Story />
-      // </View>
-      <View style={{ padding: 44, flex: 1 }}>
+      <View style={{ padding: 4, flex: 1, borderColor: "red", borderWidth: 6 }}>
         <Story />
       </View>
+      // <View style={{ padding: 44, flex: 1 }}>
+      //   <Story />
+      // </View>
     ),
   ],
 };
