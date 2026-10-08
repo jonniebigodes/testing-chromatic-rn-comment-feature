@@ -8,6 +8,21 @@ const meta = {
   title: "Button",
   component: Button,
   args: { onPress: fn() },
+  decorators: [
+    (Story) => (
+      <View
+        style={{
+          padding: 44,
+          flex: 1,
+          alignItems: "center",
+          borderColor: "red",
+          borderWidth: 6,
+        }}
+      >
+        <Story />
+      </View>
+    ),
+  ],
 } satisfies Meta<typeof Button>;
 
 export default meta;
