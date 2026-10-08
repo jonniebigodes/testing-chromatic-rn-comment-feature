@@ -11,6 +11,21 @@ const basicOptions = [
 const meta = {
   title: "Combobox",
   component: Combobox,
+  decorators: [
+    (Story) => (
+      <View
+        style={{
+          padding: 44,
+          flex: 1,
+          alignItems: "center",
+          borderColor: "red",
+          borderWidth: 8,
+        }}
+      >
+        <Story />
+      </View>
+    ),
+  ],
 } satisfies Meta<typeof Combobox>;
 
 export default meta;
