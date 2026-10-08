@@ -1,0 +1,35 @@
+# COMPONENTOWNERS
+# Ownership for Storybook components and groups
+
+##################################################
+# 🧑‍💻 Fallback (must come first — last match wins)
+##################################################
+
+*                                             alfredo.afarius@gmail.com
+
+##################################################
+# 🎨 Design System Core — Forms & Date/Time
+##################################################
+
+Avatar/*                                     carlos.alberto.fulgrim@gmail.com
+Button/*                                     alfredo.afarius@gmail.com  carlos.alberto.fulgrim@gmail.com
+OTPInput/*                                   alfredo.afarius@gmail.com
+
+##################################################
+# 🧭 Navigation & Layout
+##################################################
+
+
+##################################################
+# 🖱️ Actions & Menus
+##################################################
+
+##################################################
+# ✨ Animations
+##################################################
+
+
+##################################################
+# 📚 Story-level overrides
+##################################################
+
